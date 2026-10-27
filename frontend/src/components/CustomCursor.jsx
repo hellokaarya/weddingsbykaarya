@@ -16,10 +16,11 @@ export default function CustomCursor() {
   stateRef.current = state;
 
   useEffect(() => {
-    if (!enabled || !videoEl.current) return;
+    if (!enabled || !state.shimmer || !videoEl.current) return;
 
     const video = videoEl.current;
     const load = () => {
+      if (!video.isConnected || !stateRef.current.shimmer) return;
       video.src = CURSOR_VIDEO;
       video.load();
       const play = video.play();
@@ -27,14 +28,13 @@ export default function CustomCursor() {
     };
 
     if ("requestIdleCallback" in window) {
-      const id = window.requestIdleCallback(load, { timeout: 2500 });
+      const id = window.requestIdleCallback(load, { timeout: 3000 });
       return () => window.cancelIdleCallback(id);
     }
 
-    const timer = window.setTimeout(load, 1500);
+    const timer = window.setTimeout(load, 1800);
     return () => window.clearTimeout(timer);
-  }, [enabled]);
-
+  }, [enabled, state.shimmer]);
   useEffect(() => {
     const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
     if (!mq.matches) return;
@@ -62,6 +62,7 @@ export default function CustomCursor() {
         ringRoot.current && ringRoot.current.classList.add("kaarya-cur-ready");
         dotRoot.current && dotRoot.current.classList.add("kaarya-cur-ready");
       }
+      scheduleRender();
     };
 
     const classify = (t) => {
@@ -96,6 +97,7 @@ export default function CustomCursor() {
     const ringLerp = reduced ? 1 : 0.16;
     const dotLerp = reduced ? 1 : 0.42;
 
+    let running = false;
     const render = () => {
       ring.x = lerp(ring.x, mouse.x, ringLerp);
       ring.y = lerp(ring.y, mouse.y, ringLerp);
@@ -115,14 +117,28 @@ export default function CustomCursor() {
       }
       prev.x = mouse.x;
       prev.y = mouse.y;
-      raf = requestAnimationFrame(render);
+
+      const moving = Math.abs(mouse.x - ring.x) > 0.35 ||
+        Math.abs(mouse.y - ring.y) > 0.35 ||
+        Math.abs(mouse.x - dot.x) > 0.35 ||
+        Math.abs(mouse.y - dot.y) > 0.35;
+      if (moving) {
+        raf = requestAnimationFrame(render);
+      } else {
+        running = false;
+        raf = null;
+      }
     };
+
+    function scheduleRender() {
+      if (running) return;
+      running = true;
+      raf = requestAnimationFrame(render);
+    }
 
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mouseover", onOver, { passive: true });
     window.addEventListener("mousedown", onDown, { passive: true });
-    raf = requestAnimationFrame(render);
-
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("mousemove", onMove);
