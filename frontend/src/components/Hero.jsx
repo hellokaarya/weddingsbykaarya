@@ -139,6 +139,9 @@ export default function Hero() {
           <img
             src="/hero-wedding.png"
             alt="Luxury Indian destination wedding at a palace"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
             className="absolute inset-0 h-full w-full object-cover"
             style={{
               objectPosition: "center center",
