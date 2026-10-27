@@ -63,19 +63,19 @@ export default function Hero() {
   const imageScale = useTransform(
     scrollYProgress,
     [0, 1],
-    [1.02, 1.12]
+    [1.01, 1.06]
   );
 
   const imageY = useTransform(
     scrollYProgress,
     [0, 1],
-    ["0%", "10%"]
+    ["0%", "4%"]
   );
 
   const contentY = useTransform(
     scrollYProgress,
     [0, 1],
-    ["0%", "-12%"]
+    ["0%", "-6%"]
   );
 
   const contentOpacity = useTransform(
@@ -87,7 +87,7 @@ export default function Hero() {
   const overlayOpacity = useTransform(
     scrollYProgress,
     [0, 1],
-    [0.62, 0.78]
+    [0.62, 0.72]
   );
 
   /*
