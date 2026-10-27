@@ -46,15 +46,15 @@ export default function Testimonials() {
         </div>
 
         <div className="mt-12 flex items-center justify-center gap-6">
-          <button data-testid="testimonial-prev" onClick={prev} className="p-3 transition-colors duration-300 hover:bg-[#C9A46B]/10" style={{ border: "1px solid rgba(201,164,107,0.4)" }}>
+          <button type="button" aria-label="Previous testimonial" data-testid="testimonial-prev" onClick={prev} className="p-3 transition-colors duration-300 hover:bg-[#C9A46B]/10" style={{ border: "1px solid rgba(201,164,107,0.4)" }}>
             <ChevronLeft size={20} color="#C9A46B" />
           </button>
           <div className="flex gap-2">
             {TESTIMONIALS.map((_, i) => (
-              <button key={i} data-testid={`testimonial-dot-${i}`} onClick={() => setIdx(i)} className="h-1.5 transition-all duration-500" style={{ width: i === idx ? 28 : 8, backgroundColor: i === idx ? "#C9A46B" : "rgba(201,164,107,0.35)" }} />
+              <button key={i} type="button" aria-label={`Show testimonial ${i + 1}`} aria-current={i === idx ? "true" : undefined} data-testid={`testimonial-dot-${i}`} onClick={() => setIdx(i)} className="h-1.5 transition-all duration-500" style={{ width: i === idx ? 28 : 8, backgroundColor: i === idx ? "#C9A46B" : "rgba(201,164,107,0.35)" }} />
             ))}
           </div>
-          <button data-testid="testimonial-next" onClick={next} className="p-3 transition-colors duration-300 hover:bg-[#C9A46B]/10" style={{ border: "1px solid rgba(201,164,107,0.4)" }}>
+          <button type="button" aria-label="Next testimonial" data-testid="testimonial-next" onClick={next} className="p-3 transition-colors duration-300 hover:bg-[#C9A46B]/10" style={{ border: "1px solid rgba(201,164,107,0.4)" }}>
             <ChevronRight size={20} color="#C9A46B" />
           </button>
         </div>
