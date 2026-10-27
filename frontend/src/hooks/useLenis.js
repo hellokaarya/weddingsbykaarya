@@ -4,7 +4,7 @@ import Lenis from "lenis";
 export default function useLenis() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.25,
+      duration: 0.8,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       touchMultiplier: 1.6,
@@ -32,7 +32,7 @@ export function scrollToId(id) {
   const el = document.getElementById(id);
   if (!el) return;
   if (window.__lenis) {
-    window.__lenis.scrollTo(el, { offset: -20, duration: 1.4 });
+    window.__lenis.scrollTo(el, { offset: -20, duration: 0.9 });
   } else {
     el.scrollIntoView({ behavior: "smooth" });
   }
