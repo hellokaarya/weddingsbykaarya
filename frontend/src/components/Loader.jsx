@@ -23,7 +23,7 @@ export default function Loader({ onDone }) {
           exit={{ opacity: 0, transition: { duration: 0.25, ease: "easeInOut" } }}
         >
           <div className="relative flex items-center justify-center">
-            <Mandala className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px] animate-spin-slow opacity-40" />
+            <Mandala className="absolute w-[280px] h-[280px] md:w-[360px] md:h-[360px] opacity-40" />
             <img
               src="/logo1.png"
               alt="Kaarya Logo"
