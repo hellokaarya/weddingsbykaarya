@@ -151,7 +151,7 @@ function HomePage({ showFooter }) {
 */
 
 function App() {
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(true);
   const [showFooter, setShowFooter] = useState(false);
 
   useLenis();
