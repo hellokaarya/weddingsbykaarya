@@ -13,8 +13,6 @@ import ScrollToTop from "@/components/ScrollToTop";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
-import WeddingServices from "./pages/WeddingServices";
-import IndianDestinationWedding from "./pages/IndianDestinationWedding";
 
 
 /*
@@ -22,6 +20,9 @@ import IndianDestinationWedding from "./pages/IndianDestinationWedding";
 | Lazy-loaded Components
 |--------------------------------------------------------------------------
 */
+
+const WeddingServices = lazy(() => import("./pages/WeddingServices"));
+const IndianDestinationWedding = lazy(() => import("./pages/IndianDestinationWedding"));
 
 const Gallery = lazy(() => import("@/components/Gallery"));
 const Destinations = lazy(() => import("@/components/Destinations"));
