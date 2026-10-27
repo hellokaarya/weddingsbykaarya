@@ -98,10 +98,11 @@ export default function Contact() {
               <div className="grid sm:grid-cols-2 gap-6">
                 {FIELDS.map((f) => (
                   <div key={f.name} className={f.name === "name" ? "sm:col-span-2" : ""}>
-                    <label className="block text-[0.65rem] tracking-[0.25em] uppercase mb-2" style={{ color: "#E8DAC8" }}>
+                    <label htmlFor={`contact-${f.name}`} className="block text-[0.65rem] tracking-[0.25em] uppercase mb-2" style={{ color: "#E8DAC8" }}>
                       {f.label}{f.required ? " *" : ""}
                     </label>
                     <input
+                      id={`contact-${f.name}`}
                       data-testid={`input-${f.name}`}
                       type={f.type}
                       name={f.name}
@@ -118,8 +119,9 @@ export default function Contact() {
              
 
               <div>
-                <label className="block text-[0.65rem] tracking-[0.25em] uppercase mb-2" style={{ color: "#E8DAC8" }}>Tell Us Your Vision</label>
+                <label htmlFor="contact-message" className="block text-[0.65rem] tracking-[0.25em] uppercase mb-2" style={{ color: "#E8DAC8" }}>Tell Us Your Vision</label>
                 <textarea
+                  id="contact-message"
                   data-testid="input-message"
                   name="message"
                   rows={4}
